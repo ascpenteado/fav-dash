@@ -62,37 +62,6 @@
       "options": {
         "lintFilePatterns": ["apps/fav-dash/**/*.{ts,tsx,js,jsx}"]
       }
-    },
-    "storybook": {
-      "executor": "@nx/storybook:storybook",
-      "options": {
-        "port": 4400,
-        "configDir": "apps/fav-dash/.storybook"
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
-    },
-    "build-storybook": {
-      "executor": "@nx/storybook:build",
-      "outputs": ["{options.outputDir}"],
-      "options": {
-        "outputDir": "dist/storybook/fav-dash",
-        "configDir": "apps/fav-dash/.storybook"
-      },
-      "configurations": {
-        "ci": {
-          "quiet": true
-        }
-      }
-    },
-    "test-storybook": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "test-storybook -c apps/fav-dash/.storybook --url=http://localhost:4400"
-      }
     }
   },
   "tags": []
