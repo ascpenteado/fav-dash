@@ -25,6 +25,7 @@
     "**/*.jsx",
     "../../apps/fav-dash/.next/types/**/*.ts",
     "../../dist/apps/fav-dash/.next/types/**/*.ts",
+    "../../dist/libs/trf-components/*",
     "next-env.d.ts"
   ],
   "exclude": [

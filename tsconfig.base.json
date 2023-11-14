@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@transfeera/trf-components": ["libs/trf-components/src/index.ts"]
+      "@transfeera/trf-components": ["dist/libs/trf-components"],
+      "@transfeera/trf-components/*": ["dist/libs/trf-components/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

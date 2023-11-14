@@ -1,4 +1,5 @@
 import './global.css';
+import 'dist/libs/trf-components/style.css';
 
 export const metadata = {
   title: 'Welcome to fav-dash',
