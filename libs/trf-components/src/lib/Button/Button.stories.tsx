@@ -2,20 +2,20 @@
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Button from './Button.component';
+import ButtonComponent from './Button.component';
 
-const meta: Meta<typeof Button> = {
-  component: Button,
+const meta: Meta<typeof ButtonComponent> = {
+  component: ButtonComponent,
+  argTypes: { onClick: { action: 'clicked' } },
 };
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof ButtonComponent>;
 
-/*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
- * See https://storybook.js.org/docs/react/api/csf
- * to learn how to use render functions.
- */
-export const Primary: Story = {
-  render: () => <Button />,
+export const Button: Story = {
+  // render: () => <Button onClick={() => console.log('hi')} disabled={true}>Click me</Button>,
+  args: {
+    children: 'Hello, world!',
+    disabled: false,
+  },
 };
