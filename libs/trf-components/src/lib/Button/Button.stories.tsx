@@ -3,19 +3,45 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import ButtonComponent from './Button.component';
+import { ThemeColors } from '../../types/Colors';
 
 const meta: Meta<typeof ButtonComponent> = {
   component: ButtonComponent,
-  argTypes: { onClick: { action: 'clicked' } },
+  argTypes: {
+    variant: { control: 'select', options: [...Object.values(ThemeColors)] },
+    onClick: {
+      action: 'clicked',
+      table: { disable: true },
+    },
+  },
 };
 
 export default meta;
 type Story = StoryObj<typeof ButtonComponent>;
 
-export const Button: Story = {
-  // render: () => <Button onClick={() => console.log('hi')} disabled={true}>Click me</Button>,
+export const Flat: Story = {
   args: {
     children: 'Hello, world!',
     disabled: false,
+    outline: false,
+    variant: ThemeColors.PrimaryColor,
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    children: 'Hello, world!',
+    disabled: false,
+    outline: true,
+    variant: ThemeColors.PrimaryColor,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    children: 'Hello, world!',
+    disabled: true,
+    outline: false,
+    variant: ThemeColors.PrimaryColor,
   },
 };

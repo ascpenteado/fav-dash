@@ -1,9 +1,32 @@
 @use '../../theme/variables/text-styles' as *;
+@use '../../theme/variables/colors' as *;
 
-.primary {
-  padding: 1rem;
-  text-transform: uppercase;
-  background-color: var(--primary-color);
-
+.btn {
+  padding-block: 1.0625rem;
+  min-width: 9.875rem;
+  height: 3.125rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  cursor: pointer;
   @include cta;
+}
+
+@each $token, $color in $colors {
+  .#{$token} {
+    background-color: #{$color};
+    color: var(--white);
+  }
+
+  .#{$token}-outline {
+    outline: 1px solid #{$color};
+    color: #{$color};
+    background-color: transparent;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  background-color: var(--neutral-color-lighter) !important;
+  color: var(--neutral-color-dark) !important;
+  outline: 0;
 }

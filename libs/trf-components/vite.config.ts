@@ -45,7 +45,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "${pathSrc}/theme/index.scss as *";`,
+        additionalData: `@use "${pathSrc}/theme/index.scss" as *;`,
       },
     },
   },
