@@ -14,6 +14,7 @@
     "build-storybook": "nx run trf-components:build-storybook",
     "test-storybook": "nx run trf-components:test-storybook",
     "build-components": "nx run trf-components:build",
+    "watch-components": "nx run trf-components:build --watch",
     "test-components": "nx run trf-components:test",
     "prepare": "husky install"
   },
@@ -29,6 +30,7 @@
   "private": true,
   "dependencies": {
     "@nx/next": "16.7.4",
+    "classnames": "^2.3.2",
     "next": "13.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
