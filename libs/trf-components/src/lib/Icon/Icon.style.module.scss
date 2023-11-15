@@ -1,0 +1,13 @@
+.iconWrapper {
+  display: inline-block;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+
+  svg {
+    path,
+    rect {
+      fill: currentColor;
+    }
+  }
+}

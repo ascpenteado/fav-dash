@@ -1,26 +1,43 @@
 @use '../../theme/variables/text-styles' as *;
 @use '../../theme/variables/colors' as *;
+@use 'sass:color';
 
 .btn {
+  @include cta;
+  text-align: center;
+
   padding-block: 1.0625rem;
   min-width: 9.875rem;
   height: 3.125rem;
-  text-align: center;
   border-radius: 0.25rem;
   cursor: pointer;
-  @include cta;
+  transition: background-color 0.3s ease;
+}
+
+.responsive {
+  min-width: unset;
+  height: unset;
+  line-height: 0;
+  padding: 0;
 }
 
 @each $token, $color in $colors {
   .#{$token} {
     background-color: #{$color};
     color: var(--white);
+    &:hover {
+      background-color: lighten($color, 10%);
+    }
   }
 
   .#{$token}-outline {
     outline: 1px solid #{$color};
     color: #{$color};
     background-color: transparent;
+    &:hover {
+      color: var(--white);
+      background-color: $color;
+    }
   }
 }
 

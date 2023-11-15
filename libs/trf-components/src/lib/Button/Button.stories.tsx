@@ -4,15 +4,14 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import ButtonComponent from './Button.component';
 import { ThemeColors } from '../../types/Colors';
+import Icon from '../Icon/Icon.component';
+import plusIcon from '../../assets/svg/plus-icon.svg';
 
 const meta: Meta<typeof ButtonComponent> = {
   component: ButtonComponent,
   argTypes: {
     variant: { control: 'select', options: [...Object.values(ThemeColors)] },
-    onClick: {
-      action: 'clicked',
-      table: { disable: true },
-    },
+    // onClick: { action: 'clicked' },
   },
 };
 
@@ -33,6 +32,17 @@ export const Outline: Story = {
     children: 'Hello, world!',
     disabled: false,
     outline: true,
+    variant: ThemeColors.PrimaryColor,
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    children: <Icon iconUrl={plusIcon} altText="Add" />,
+    disabled: false,
+    outline: false,
+    responsive: true,
+    style: { width: '41px', height: '41px', borderRadius: '50%' },
     variant: ThemeColors.PrimaryColor,
   },
 };

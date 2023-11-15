@@ -1,15 +1,16 @@
-import { FC, ReactNode, MouseEvent } from 'react';
+import { FC, ReactNode, MouseEvent, ComponentProps } from 'react';
+import { ThemeColors } from '../../types/Colors';
 import cn from 'classnames';
 import s from './Button.style.module.scss';
-import { ThemeColors } from '../../types/Colors';
 
-interface ButtonProps {
+type ButtonProps = {
   onClick: (event: MouseEvent<HTMLButtonElement>) => void;
   children: ReactNode;
   disabled?: boolean;
   outline?: boolean;
+  responsive?: boolean;
   variant: ThemeColors;
-}
+} & ComponentProps<'button'>;
 
 const Button: FC<ButtonProps> = ({
   children,
@@ -17,22 +18,22 @@ const Button: FC<ButtonProps> = ({
   disabled,
   outline,
   variant,
+  responsive,
+  ...rest
 }) => {
   const btnVariant = outline ? `${variant}-outline` : variant;
-
-  console.log('>> variant', variant);
-  console.log('>> outline', outline);
-
-  console.log('>> btnVariant', btnVariant);
 
   const classes = cn({
     [s.btn]: true,
     [s.outline]: !!outline,
     [s.disabled]: !!disabled,
+    [s.responsive]: responsive,
     [s[`${btnVariant}`]]: !!btnVariant,
   });
+
   return (
     <button
+      {...rest}
       onClick={onClick}
       disabled={disabled}
       className={classes}
