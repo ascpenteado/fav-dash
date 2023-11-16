@@ -1,5 +1,5 @@
 @use '../../theme/variables/text-styles' as *;
-@use '../../theme/variables/colors' as *;
+@use '../../theme/mixins/background-colors.mixin' as *;
 @use 'sass:color';
 
 .btn {
@@ -21,25 +21,7 @@
   padding: 0;
 }
 
-@each $token, $color in $colors {
-  .#{$token} {
-    background-color: #{$color};
-    color: var(--white);
-    &:hover {
-      background-color: lighten($color, 10%);
-    }
-  }
-
-  .#{$token}-outline {
-    outline: 1px solid #{$color};
-    color: #{$color};
-    background-color: transparent;
-    &:hover {
-      color: var(--white);
-      background-color: $color;
-    }
-  }
-}
+@include themeBackgrounds;
 
 .disabled {
   pointer-events: none;

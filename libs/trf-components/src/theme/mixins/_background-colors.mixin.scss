@@ -1,0 +1,23 @@
+@use '../variables/colors' as *;
+
+@mixin themeBackgrounds {
+  @each $token, $color in $colors {
+    .#{$token} {
+      background-color: #{$color};
+      color: var(--white);
+      &:hover {
+        background-color: lighten($color, 10%);
+      }
+    }
+
+    .#{$token}-outline {
+      outline: 1px solid #{$color};
+      color: #{$color};
+      background-color: transparent;
+      &:hover {
+        color: var(--white);
+        background-color: $color;
+      }
+    }
+  }
+}

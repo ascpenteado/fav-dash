@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Icon from './Icon.component';
+import IconComponent from './Icon.component';
 import trashCan from '../../assets/svg/trashcan.svg';
 
-const iconMeta: Meta<typeof Icon> = {
+const iconMeta: Meta<typeof IconComponent> = {
   title: 'Icon',
-  component: Icon,
+  component: IconComponent,
   argTypes: {
     iconUrl: { control: 'text' },
     altText: { control: 'text' },
@@ -12,9 +12,9 @@ const iconMeta: Meta<typeof Icon> = {
 };
 
 export default iconMeta;
-type IconStory = StoryObj<typeof Icon>;
+type IconStory = StoryObj<typeof IconComponent>;
 
-export const ExampleIcon: IconStory = {
+export const Icon: IconStory = {
   args: {
     iconUrl: trashCan,
     altText: 'Example Icon',
@@ -22,5 +22,5 @@ export const ExampleIcon: IconStory = {
   parameters: {
     controls: { hideNoControlsWarning: true },
   },
-  render: (args) => <Icon {...args} />,
+  render: (args) => <IconComponent {...args} />,
 };

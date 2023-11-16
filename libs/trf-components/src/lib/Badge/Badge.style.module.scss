@@ -1,0 +1,15 @@
+@use '../../theme/variables/text-styles' as *;
+@use '../../theme/mixins/background-colors.mixin' as *;
+
+.badge {
+  display: inline-block;
+  @include cta;
+  color: var(--white);
+  text-align: center;
+  padding: 0.4375rem;
+  border-radius: 6.25rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+@include themeBackgrounds;

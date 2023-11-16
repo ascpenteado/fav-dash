@@ -11,7 +11,6 @@ const meta: Meta<typeof ButtonComponent> = {
   component: ButtonComponent,
   argTypes: {
     variant: { control: 'select', options: [...Object.values(ThemeColors)] },
-    // onClick: { action: 'clicked' },
   },
 };
 
