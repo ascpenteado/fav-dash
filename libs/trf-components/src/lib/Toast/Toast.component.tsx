@@ -51,8 +51,6 @@ const Toast: React.FC<ToastProps> = ({
     onClose();
   };
 
-  console.log('>> isVisible', isVisible);
-
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>

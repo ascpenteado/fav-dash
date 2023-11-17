@@ -10,21 +10,10 @@
   font-weight: 400;
 }
 
-// table header
-// color: #72818D;
-// font-family: Roboto;
-// font-size: 16px;
-// font-style: normal;
-// font-weight: 700;
-// line-height: normal;
-
-// // table value
-// color: #4D565D;
-// font-family: Roboto;
-// font-size: 16px;
-// font-style: normal;
-// font-weight: 300;
-// line-height: normal;
+@mixin content {
+  @include baseText;
+  font-size: 16px;
+}
 
 // // title
 // color: #4D565D;
