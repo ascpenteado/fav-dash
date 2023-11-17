@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
 import s from './Icon.style.module.scss';
 
 type IconProps = {
   iconUrl: string;
-  altText?: string;
 };
 
-const Icon: React.FC<IconProps> = ({ iconUrl, altText = 'Icon' }) => {
+const Icon: FC<IconProps> = ({ iconUrl }) => {
   const [svgContent, setSvgContent] = useState<string>('');
 
   useEffect(() => {

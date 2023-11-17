@@ -7,6 +7,13 @@ const meta: Meta<typeof BadgeComponent> = {
   argTypes: {
     variant: { control: 'select', options: [...Object.values(ThemeColors)] },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ maxWidth: '190px' }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
