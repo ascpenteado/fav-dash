@@ -5,7 +5,7 @@ const meta: Meta<typeof InputComponent> = {
   component: InputComponent,
   argTypes: {
     onClick: { action: null },
-    onInput: { action: 'onInput' },
+    onInput: { action: 'onInput', table: { disable: true } },
   },
   decorators: [
     (Story) => (

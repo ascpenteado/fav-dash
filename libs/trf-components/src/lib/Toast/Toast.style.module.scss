@@ -1,0 +1,45 @@
+@use '../../theme/variables/text-styles' as *;
+@use '../../theme/mixins/background-colors.mixin' as *;
+
+.wrapper {
+  position: fixed;
+  right: 1.25rem;
+  top: 5rem;
+  transition: transform 0.4s ease;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.1s ease 0.5s;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  transition: background-color 0.3s ease;
+  min-width: 284px;
+
+  @include cta;
+  font-weight: 500;
+  line-height: 1.42;
+  transform: translateX(500px);
+  transition: transform 0.4s ease 0.3s;
+}
+
+.visible {
+  opacity: 1;
+  transition: opacity 0.1s;
+  .toast {
+    transform: translateX(0px);
+    transition: transform 0.4s ease;
+  }
+}
+
+.iconWrapper {
+  cursor: pointer;
+  width: 17px;
+  height: 17px;
+}
+
+@include themeBackgrounds;
