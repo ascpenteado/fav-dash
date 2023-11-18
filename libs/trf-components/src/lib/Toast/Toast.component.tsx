@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { ThemeColors } from '../../types/Colors';
 import s from './Toast.style.module.scss';
 import Icon from '../Icon/Icon.component';
@@ -13,7 +13,7 @@ interface ToastProps {
   visible?: boolean;
 }
 
-const Toast: React.FC<ToastProps> = ({
+const Toast: FC<ToastProps> = ({
   variant,
   message,
   duration,

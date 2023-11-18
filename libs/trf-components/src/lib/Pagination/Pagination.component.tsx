@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import s from './Pagination.style.module.scss';
 import Icon from '../Icon/Icon.component';
 import arrow from '../../assets/svg/smaller-than.svg';
@@ -9,7 +9,7 @@ export type PaginationProps = {
   onPageChange: (page: number) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination: FC<PaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,

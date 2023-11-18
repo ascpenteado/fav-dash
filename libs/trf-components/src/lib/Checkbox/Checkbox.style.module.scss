@@ -1,0 +1,56 @@
+@use '../../theme/variables/text-styles' as *;
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--neutral-color-darker);
+  cursor: pointer;
+  gap: 0.75rem;
+
+  .checkboxInput {
+    display: none;
+  }
+
+  .label {
+    @include content;
+  }
+
+  .after {
+    order: 3;
+  }
+
+  .before {
+    order: 1;
+  }
+
+  .checkmark {
+    order: 2;
+    position: relative;
+    display: inline-block;
+    aspect-ratio: 1;
+    width: 1rem;
+    border-color: inherit;
+    border: 1px solid;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+      left: 50%;
+      top: 45%;
+      width: 5px;
+      height: 10px;
+      border: solid var(--primary-color-dark);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      translate: -50% -50%;
+    }
+  }
+
+  .checkboxInput:checked + .checkmark::after {
+    display: block;
+  }
+}
