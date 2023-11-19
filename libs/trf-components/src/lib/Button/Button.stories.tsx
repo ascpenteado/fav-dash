@@ -37,11 +37,11 @@ export const Outline: Story = {
 
 export const WithIcon: Story = {
   args: {
-    children: <Icon iconUrl={plusIcon} altText="Add" />,
+    children: <Icon iconUrl={plusIcon} />,
     disabled: false,
     outline: false,
     responsive: true,
-    style: { width: '41px', height: '41px', borderRadius: '50%' },
+    style: { borderRadius: '50%', padding: '.4rem' },
     variant: ThemeColors.PrimaryColor,
   },
 };
