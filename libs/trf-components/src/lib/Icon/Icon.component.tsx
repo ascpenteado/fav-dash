@@ -1,12 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
 import s from './Icon.style.module.scss';
+import classNames from 'classnames';
 
 type IconProps = {
   iconUrl: string;
+  withCurrentColor?: boolean;
 };
 
-const Icon: FC<IconProps> = ({ iconUrl }) => {
+const Icon: FC<IconProps> = ({ iconUrl, withCurrentColor = true }) => {
   const [svgContent, setSvgContent] = useState<string>('');
 
   useEffect(() => {
@@ -24,9 +26,14 @@ const Icon: FC<IconProps> = ({ iconUrl }) => {
     fetchIcon();
   }, [iconUrl]);
 
+  const wrapperClasses = classNames({
+    [s.iconWrapper]: true,
+    [s.withCurrentColor]: withCurrentColor,
+  });
+
   return (
     <div
-      className={s.iconWrapper}
+      className={wrapperClasses}
       dangerouslySetInnerHTML={{ __html: svgContent }}
     ></div>
   );

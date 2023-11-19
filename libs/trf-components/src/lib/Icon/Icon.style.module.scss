@@ -8,6 +8,11 @@
   svg {
     width: inherit;
     height: inherit;
+  }
+}
+
+.withCurrentColor {
+  svg {
     path,
     rect {
       fill: currentColor;

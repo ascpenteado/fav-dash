@@ -1,0 +1,52 @@
+@use '../../theme/variables/text-styles' as *;
+@use '../../theme/mixins/background-colors.mixin' as *;
+
+.logoWrapper {
+  padding-block: 0.625rem 0.9375rem;
+}
+
+.navbar {
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation {
+  list-style: none;
+  display: block;
+  color: var(--white);
+  display: flex;
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.navItem {
+  display: block;
+  @include cta;
+  border-bottom: 3px solid var(--white);
+  height: 100%;
+  padding-block: 1.0625rem 0.875rem;
+  padding-right: 0.875rem;
+}
+
+.iconWrapper {
+  color: var(--white);
+  width: 1.3125rem;
+  height: 1.3125rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.showClose {
+  .navigation {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .iconWrapper {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+  }
+}

@@ -20,7 +20,7 @@ const meta: Meta<typeof ToastComponent> = {
 export default meta;
 type Story = StoryObj<typeof ToastComponent>;
 
-export const WithTime: Story = {
+export const WithTimer: Story = {
   args: {
     message: 'Favorecido alterado com sucesso',
     variant: ThemeColors.PrimaryColor,
