@@ -2,14 +2,8 @@ import { FC, Suspense, useState } from 'react';
 import { Badge, Checkbox, Listing, Table } from '@components';
 import s from './List.style.module.scss';
 import { ColorsType } from '@components/types/Colors';
-import { Receiver } from '../../types/api.type';
-
-type StatusColorMap = Record<string, string>;
-
-const statusColorMap: StatusColorMap = {
-  rascunho: 'neutral-color-dark',
-  validado: 'success-color',
-};
+import { Receiver, statusColorMap } from '../../types/api.type';
+import { modalActions } from '../../store/modal/modal.actions';
 
 type ListProps = {
   listData: Receiver[];
@@ -46,6 +40,20 @@ const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
     }
   };
 
+  const openModal = async (item: Receiver) => {
+    if (item.status === 'rascunho') {
+      const Draft = await import('../DraftModalContent/DraftModalContent');
+      modalActions.openModal(Draft.default, { favorite: item });
+    }
+
+    if (item.status === 'validado') {
+      const Validated = await import(
+        '../ValidatedModalContent/ValidatedModalContent'
+      );
+      modalActions.openModal(Validated.default, { favorite: item });
+    }
+  };
+
   return (
     <Listing onDeleteSelected={() => onDeleteSelected(selectedFavorites)}>
       <Suspense fallback={<Loading />}>
@@ -74,7 +82,7 @@ const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
                     checked={selectedFavorites.includes(item)}
                     onChange={() => selectOne(item)}
                   />
-                  <span className={s.name} onClick={() => console.log(item)}>
+                  <span className={s.name} onClick={() => openModal(item)}>
                     {item.name}
                   </span>
                 </td>

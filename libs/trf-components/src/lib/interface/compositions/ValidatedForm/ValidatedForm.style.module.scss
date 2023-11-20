@@ -1,0 +1,127 @@
+@use '../../../../theme/mixins/container.mixin' as *;
+@use '../../../../theme/variables/text-styles' as *;
+
+.wrapper {
+  padding-bottom: 3rem;
+  width: 635px;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  margin-bottom: 2.25rem;
+
+  .badgeWrapper {
+    max-width: 220px;
+  }
+
+  .name {
+    color: var(--neutral-color-darker);
+    font-family: Roboto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+
+.formWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.form {
+  grid-column: span 2;
+  display: grid;
+
+  grid-template-columns: 394px 175px;
+  gap: 0 2.8125rem;
+}
+
+.infoGroup {
+  padding-bottom: 30px;
+  .label {
+    color: #757575;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+
+  .value {
+    color: #4d565d;
+    font-family: Roboto;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+}
+
+.formGroup {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding-bottom: 2.625rem;
+  label {
+    margin-bottom: 0.5rem;
+    @include cta;
+    color: var(--neutral-color-darker);
+  }
+  input,
+  select {
+    max-width: 350px;
+  }
+}
+
+.title {
+  @include title;
+  grid-column: span 2;
+  padding-bottom: 2.625rem;
+  &:first-child {
+    padding-top: 4.625rem;
+  }
+}
+
+.pixType {
+  grid-column: span 2;
+}
+
+.btnsWrapper {
+  grid-column: span 2;
+  display: flex;
+  max-width: 40.4375rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.errorMsg {
+  @include cta;
+  position: absolute;
+  bottom: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--danger-color-light);
+  padding-top: 0.5rem;
+  padding-left: 0.2rem;
+}
+
+.btnRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.deleteBtn {
+  width: 3.875rem;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .iconWrapper {
+    width: 14px;
+    height: 18px;
+  }
+}

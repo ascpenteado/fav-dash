@@ -3,14 +3,14 @@ import * as yup from 'yup';
 import Button from '../../../elements/Button/Button.component';
 import Input from '../../../elements/Input/Input.component';
 import Select from '../../../elements/Select/Select.component';
-import s from './AddFavoriteForm.style.module.scss';
+import s from './AddForm.style.module.scss';
 
 export type FormValues = {
   name: string;
   taxId: string;
   email: string;
   pixType: string;
-  pixValue: string;
+  pixKey: string;
 };
 
 type AddFavoriteFormProps = {
@@ -44,7 +44,7 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({ onCancel, onSave }) => {
     taxId: '',
     email: '',
     pixType: '',
-    pixValue: '',
+    pixKey: '',
   };
   const [formValues, setFormValues] = useState<FormValues>(initialFormState);
 
@@ -61,7 +61,7 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({ onCancel, onSave }) => {
       .email('Digite um e-mail válido')
       .required('E-mail é obrigatório'),
     pixType: yup.string().required('Tipo de chave PIX é obrigatório'),
-    pixValue: yup.string().required('Chave PIX é obrigatória'),
+    pixKey: yup.string().required('Chave PIX é obrigatória'),
   });
 
   const handleInputChange = (
@@ -166,13 +166,13 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({ onCancel, onSave }) => {
               <label htmlFor="pix-value">Chave</label>
               <Input
                 id="pix-value"
-                name="pixValue"
+                name="pixKey"
                 hasBorder
-                value={formValues.pixValue}
+                value={formValues.pixKey}
                 onChange={handleInputChange}
               />
-              {errors.pixValue && (
-                <span className={s.errorMsg}>{errors.pixValue}</span>
+              {errors.pixKey && (
+                <span className={s.errorMsg}>{errors.pixKey}</span>
               )}
             </div>
 

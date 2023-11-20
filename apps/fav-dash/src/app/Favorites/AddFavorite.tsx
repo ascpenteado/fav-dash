@@ -14,7 +14,7 @@ const AddFavorite = () => {
   };
 
   const handleSave = async (data: FormValues) => {
-    const { name, email, pixType, pixValue, taxId } = data;
+    const { name, email, pixType, pixKey, taxId } = data;
 
     const id = uuidv4();
     try {
@@ -23,7 +23,7 @@ const AddFavorite = () => {
         name,
         email,
         pix_key_type: pixType,
-        pix_key: pixValue,
+        pix_key: pixKey,
         tax_id: taxId,
         account: null,
         account_type: null,

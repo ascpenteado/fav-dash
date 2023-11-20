@@ -2,8 +2,29 @@
 @use '../../../../theme/variables/text-styles' as *;
 
 .wrapper {
-  @include app-container;
+  // @include app-container;
   padding-bottom: 3rem;
+  width: 732px;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  margin-bottom: 2.25rem;
+
+  .badgeWrapper {
+    max-width: 220px;
+  }
+
+  .name {
+    color: var(--neutral-color-darker);
+    font-family: Roboto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 }
 
 .form {
@@ -21,6 +42,7 @@
   label {
     margin-bottom: 0.5rem;
     @include cta;
+    color: var(--neutral-color-darker);
   }
   input,
   select {
@@ -57,4 +79,23 @@
   color: var(--danger-color-light);
   padding-top: 0.5rem;
   padding-left: 0.2rem;
+}
+
+.btnRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.deleteBtn {
+  width: 3.875rem;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .iconWrapper {
+    width: 14px;
+    height: 18px;
+  }
 }

@@ -13,4 +13,6 @@ export { default as Toast } from './lib/elements/Toast/Toast.component';
 
 export { default as Header } from './lib/interface/compositions/Header/Header.component';
 export { default as Listing } from './lib/interface/compositions/Listing/Listing.component';
-export { default as AddFavoriteForm } from './lib/interface/compositions/AddFavoriteForm/AddFavoriteForm.component';
+export { default as AddForm } from './lib/interface/compositions/AddForm/AddForm.component';
+export { default as DraftForm } from './lib/interface/compositions/DraftForm/DraftForm.component';
+export { default as ValidatedForm } from './lib/interface/compositions/ValidatedForm/ValidatedForm.component';

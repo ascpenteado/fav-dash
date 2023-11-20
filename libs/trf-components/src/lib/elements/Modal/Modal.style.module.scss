@@ -10,8 +10,8 @@
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  align-items: center;
   backdrop-filter: blur(7px);
+  padding-top: 5rem;
 }
 
 .modal {
@@ -19,7 +19,8 @@
   padding: 2.625rem;
   border-radius: 0.25rem;
   max-width: 80%;
-  max-height: 80%;
+  max-height: 95%;
+  height: fit-content;
   overflow: auto;
   position: relative;
   box-shadow: 0px 1px 5px 0px hsla(0, 0%, 0%, 0.1);

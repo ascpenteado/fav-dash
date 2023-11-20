@@ -1,12 +1,15 @@
+import { Menu, Modal, Toast } from '@components';
 import '@components/style.css';
 import { Outlet } from 'react-router-dom';
-import { Menu, Toast } from '@components';
 import { useSnapshot } from 'valtio';
-import { toastStore } from '../store/toast/toast.state';
+import { modalActions } from '../store/modal/modal.actions';
+import { modalStore } from '../store/modal/modal.state';
 import { toastActions } from '../store/toast/toast.actions';
+import { toastStore } from '../store/toast/toast.state';
 
 export function App() {
   const toastState = useSnapshot(toastStore);
+  const modalState = useSnapshot(modalStore);
   const toastVariantMap = {
     success: 'success-color',
     error: 'danger-color',
@@ -14,6 +17,13 @@ export function App() {
 
   const handleToastClose = (id: string) => {
     toastActions.removeToast(id);
+  };
+
+  const renderModalContent = () => {
+    if (!modalState.content) return;
+
+    const Component = modalState.content.Component;
+    return <Component {...modalState.content.props} />;
   };
 
   return (
@@ -40,6 +50,15 @@ export function App() {
           duration={3000}
         />
       ))}
+
+      {modalState.content && (
+        <Modal
+          isOpen={modalState.isOpen}
+          onClose={() => modalActions.closeModal()}
+        >
+          {renderModalContent()}
+        </Modal>
+      )}
     </div>
   );
 }
