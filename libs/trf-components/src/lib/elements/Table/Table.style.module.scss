@@ -1,8 +1,10 @@
 @use '../../../theme/variables/text-styles' as *;
+@use '../../../theme/mixins/container.mixin' as *;
 
 .table {
   width: 100%;
   border-collapse: collapse;
+  @include app-container;
 
   th,
   td {

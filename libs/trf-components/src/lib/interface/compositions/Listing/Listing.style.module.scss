@@ -1,0 +1,12 @@
+@use '../../../../theme/variables/text-styles' as *;
+@use '../../../../theme/mixins/container.mixin' as *;
+@use 'sass:color';
+
+.container {
+  @include app-container;
+  padding-block: 2.5rem;
+}
+
+.tableWrapper {
+  padding-top: 2.5rem;
+}

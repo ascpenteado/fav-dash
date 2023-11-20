@@ -4,7 +4,7 @@ import s from './Checkbox.style.module.scss';
 type LabelPosition = 'before' | 'after';
 
 type CheckboxProps = {
-  label: string;
+  label?: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
   labelPosition?: LabelPosition;
