@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    "noEmit": false,
     "emitDecoratorMetadata": true,
     "outDir": ""
   },
@@ -16,8 +14,8 @@
     "src/**/*.test.ts",
     "src/**/*.spec.js",
     "src/**/*.test.js",
-    "src/**/*.spec.tsx",
     "src/**/*.test.tsx",
+    "src/**/*.spec.tsx",
     "src/**/*.spec.jsx",
     "src/**/*.test.js"
   ],

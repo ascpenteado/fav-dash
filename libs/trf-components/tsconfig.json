@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "strict": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "types": ["vite/client"],
@@ -15,9 +14,7 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "sourceMap": true,
-    "declaration": true
+    "jsx": "react-jsx"
   },
   "files": [],
   "include": ["src"],
