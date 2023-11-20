@@ -9,7 +9,7 @@ export { default as Modal } from './lib/elements/Modal/Modal.component';
 export { default as Pagination } from './lib/elements/Pagination/Pagination.component';
 export { default as Select } from './lib/elements/Select/Select.component';
 export { default as Table } from './lib/elements/Table/Table.component';
-export { default as Toast } from './lib/elements/Table/Table.component';
+export { default as Toast } from './lib/elements/Toast/Toast.component';
 
 export { default as Header } from './lib/interface/compositions/Header/Header.component';
 export { default as Listing } from './lib/interface/compositions/Listing/Listing.component';

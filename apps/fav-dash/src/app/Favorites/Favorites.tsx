@@ -3,10 +3,10 @@ import List from '../../components/List/List';
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import { toastActions } from '../../store/toast/toast.actions';
 
 const Favorites = () => {
   const [data, setData] = useState<unknown>();
-  const [error, setError] = useState<string>('');
 
   const navigate = useNavigate();
 
@@ -15,7 +15,11 @@ const Favorites = () => {
       const response = await api.get('/receivers');
       setData(response);
     } catch (err) {
-      setError('Error fetching data');
+      toastActions.addToast({
+        id: Date.now(),
+        message: 'Erro ao conectar com a API',
+        type: 'error',
+      });
       console.error('Error fetching data:', err);
     }
   };
@@ -26,7 +30,6 @@ const Favorites = () => {
 
   return (
     <>
-      {error && <p>{error}</p>}
       <Header
         label="Seus Favorecidos"
         onAddFav={() => navigate('/novo')}

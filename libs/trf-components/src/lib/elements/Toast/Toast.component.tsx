@@ -7,7 +7,7 @@ import Icon from '../Icon/Icon.component';
 
 interface ToastProps {
   message: string;
-  duration: number;
+  duration?: number;
   variant: ColorsType;
   onClose: () => void;
   visible?: boolean;
