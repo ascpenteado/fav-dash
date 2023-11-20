@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { toastActions } from '../../store/toast/toast.actions';
+import { v4 as uuidv4 } from 'uuid';
 
 const Favorites = () => {
   const [data, setData] = useState<unknown>();
@@ -12,11 +13,15 @@ const Favorites = () => {
 
   const fetchData = async () => {
     try {
-      const response = await api.get('/receivers');
+      const response = await api.get('/receivers', {
+        _sort: 'created_at',
+        _order: 'desc',
+      });
+
       setData(response);
     } catch (err) {
       toastActions.addToast({
-        id: Date.now(),
+        id: uuidv4(),
         message: 'Erro ao conectar com a API',
         type: 'error',
       });

@@ -321,6 +321,54 @@
       "status": "rascunho",
       "created_at": "2023-10-25 16:20:10-03",
       "updated_at": "2023-10-25 16:20:10-03"
+    },
+    {
+      "id": "5881e96a-46cc-43dd-b3b9-b5433cb68391",
+      "name": "aaa",
+      "email": "aaa@aa.com",
+      "pix_key_type": "aleatoria",
+      "pix_key": "123345",
+      "tax_id": "123345",
+      "account": null,
+      "account_type": null,
+      "bank_code": null,
+      "bank_name": null,
+      "branch": null,
+      "created_at": "2023-11-20 14:18:41-03:00",
+      "updated_at": "2023-11-20 14:18:41-03:00",
+      "status": "rascunho"
+    },
+    {
+      "id": "982aca55-25cf-4849-8c7d-7f9ac326e771",
+      "name": "bbbbb",
+      "email": "aaa@bbbb.com",
+      "pix_key_type": "aleatoria",
+      "pix_key": "123123123",
+      "tax_id": "12313123",
+      "account": null,
+      "account_type": null,
+      "bank_code": null,
+      "bank_name": null,
+      "branch": null,
+      "created_at": "2023-11-20 14:25:10-03:00",
+      "updated_at": "2023-11-20 14:25:10-03:00",
+      "status": "rascunho"
+    },
+    {
+      "id": "7dc311c7-af6f-4438-aa74-86bfb2592018",
+      "name": "ccc",
+      "email": "ccc@test.com",
+      "pix_key_type": "aleatoria",
+      "pix_key": "123",
+      "tax_id": "123",
+      "account": null,
+      "account_type": null,
+      "bank_code": null,
+      "bank_name": null,
+      "branch": null,
+      "created_at": "2023-11-20 14:45:08-03:00",
+      "updated_at": "2023-11-20 14:45:08-03:00",
+      "status": "rascunho"
     }
   ]
 }

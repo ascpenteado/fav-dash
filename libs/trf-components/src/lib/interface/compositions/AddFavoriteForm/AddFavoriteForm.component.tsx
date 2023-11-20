@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
 import * as yup from 'yup';
 import Button from '../../../elements/Button/Button.component';
-import s from './AddFavoriteForm.style.module.scss';
 import Input from '../../../elements/Input/Input.component';
 import Select from '../../../elements/Select/Select.component';
+import s from './AddFavoriteForm.style.module.scss';
 
 export type FormValues = {
   name: string;
@@ -38,18 +38,15 @@ const pixKeyOptions = [
   },
 ];
 
-const AddFavoriteForm: FC<AddFavoriteFormProps> = ({
-  onCancel,
-  onSave,
-  formData,
-}) => {
-  const [formValues, setFormValues] = useState<FormValues>({
-    name: formData?.name ?? '',
-    taxId: formData?.taxId ?? '',
-    email: formData?.email ?? '',
-    pixType: formData?.pixType ?? '',
-    pixValue: formData?.pixValue ?? '',
-  });
+const AddFavoriteForm: FC<AddFavoriteFormProps> = ({ onCancel, onSave }) => {
+  const initialFormState: FormValues = {
+    name: '',
+    taxId: '',
+    email: '',
+    pixType: '',
+    pixValue: '',
+  };
+  const [formValues, setFormValues] = useState<FormValues>(initialFormState);
 
   const [errors, setErrors] = useState<Partial<FormValues>>({});
 
@@ -84,7 +81,6 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({
 
     try {
       await validationSchema.validate(formValues, { abortEarly: false });
-      // Validation successful
       onSave(formValues);
     } catch (error) {
       if (error instanceof yup.ValidationError) {

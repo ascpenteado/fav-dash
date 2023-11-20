@@ -5,7 +5,7 @@ export const toastActions = {
     toastStore.toasts.push(toast);
   },
 
-  removeToast: (id: number) => {
+  removeToast: (id: string) => {
     toastStore.toasts = toastStore.toasts.filter((toast) => toast.id !== id);
   },
 

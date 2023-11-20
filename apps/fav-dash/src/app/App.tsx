@@ -12,7 +12,7 @@ export function App() {
     error: 'danger-color',
   };
 
-  const handleToastClose = (id: number) => {
+  const handleToastClose = (id: string) => {
     toastActions.removeToast(id);
   };
 
@@ -32,6 +32,7 @@ export function App() {
 
       {toastState.toasts.map((toast) => (
         <Toast
+          key={toast.id}
           onClose={() => handleToastClose(toast.id)}
           message={toast.message}
           variant={toastVariantMap[toast.type] as any}

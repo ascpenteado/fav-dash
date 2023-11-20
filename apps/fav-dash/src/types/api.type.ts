@@ -10,7 +10,9 @@ export type Receiver = {
   bank_code: string | null;
   pix_key: string;
   pix_key_type: string;
-  status: string;
+  status: FavoriteStatus;
   created_at: string;
   updated_at: string;
 };
+
+export type FavoriteStatus = 'rascunho' | 'validado';

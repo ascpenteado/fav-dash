@@ -1,7 +1,7 @@
 import { proxy, subscribe } from 'valtio';
 
 export type Toast = {
-  id: number;
+  id: string;
   message: string;
   type: 'success' | 'error';
 };
