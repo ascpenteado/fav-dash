@@ -1,8 +1,8 @@
 import { Badge, Checkbox, Listing, Table } from '@components';
 import s from './List.style.module.scss';
 
-import { receiversData as data } from './mock';
 import { ColorsType } from '@components/types/Colors';
+import { FC, Suspense } from 'react';
 
 type StatusColorMap = Record<string, string>;
 
@@ -11,9 +11,20 @@ const statusColorMap: StatusColorMap = {
   validado: 'success-color',
 };
 
-const List = () => {
+type ListProps = {
+  listData: any[];
+}
+
+const Loading = () => {
+  return (
+    <p>carregando...</p>
+  )
+}
+
+const List: FC<ListProps> = ({listData }) => {
   return (
     <Listing onDeleteSelected={() => console.log('e')}>
+      <Suspense fallback={<Loading/>}>
       <Table>
         <thead>
           <tr>
@@ -29,7 +40,7 @@ const List = () => {
           </tr>
         </thead>
         <tbody>
-          {data.receivers.map((item) => (
+          {listData?.map((item) => (
             <tr key={item.id}>
               <td className={s.checkWrapper}>
                 <Checkbox checked={false} onChange={() => console.log('oe')} />
@@ -51,6 +62,7 @@ const List = () => {
           ))}
         </tbody>
       </Table>
+      </Suspense>
     </Listing>
   );
 };

@@ -4,8 +4,8 @@ import s from './Input.style.module.scss';
 import Icon from '../Icon/Icon.component';
 
 type InputProps = {
-  hasBorder: boolean;
-  iconUrl: string;
+  hasBorder?: boolean;
+  iconUrl?: string;
 } & ComponentProps<'input'>;
 
 const Input: FC<InputProps> = ({ hasBorder, iconUrl, ...rest }) => {

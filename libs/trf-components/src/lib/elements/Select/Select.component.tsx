@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ComponentProps } from 'react';
 import styles from './Select.style.module.scss';
 
 type Option = {
@@ -9,7 +9,7 @@ type Option = {
 type SelectProps = {
   options: Option[];
   onSelect: (selectedValue: string | number) => void;
-};
+} & ComponentProps<'select'>;
 
 const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
   const [selectedValue, setSelectedValue] = useState<string | number>('');
