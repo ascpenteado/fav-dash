@@ -2,7 +2,7 @@
 
 import { ApiClient } from './api.service';
 
-const apiBaseUrl = 'http://localhost:5000';
+const apiBaseUrl = 'http://localhost:5000/';
 const apiHeaders = {
   'Content-Type': 'application/json',
 };

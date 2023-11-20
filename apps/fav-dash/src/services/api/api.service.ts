@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, {
-  AxiosRequestConfig,
-  AxiosInstance,
   AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
   Method,
 } from 'axios';
 
@@ -67,6 +67,10 @@ export class ApiClient {
     headers?: HttpHeaders,
   ): Promise<T> {
     return this.request<T>('PUT', endpoint, undefined, data, headers);
+  }
+
+  public delete<T>(endpoint: string, headers?: HttpHeaders): Promise<T> {
+    return this.request<T>('DELETE', endpoint, undefined, undefined, headers);
   }
 
   private createApiError(error: any): Error {

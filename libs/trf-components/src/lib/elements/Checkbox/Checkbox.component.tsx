@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC } from 'react';
 import s from './Checkbox.style.module.scss';
 
 type LabelPosition = 'before' | 'after';
@@ -16,11 +16,8 @@ const Checkbox: FC<CheckboxProps> = ({
   onChange,
   labelPosition = 'before',
 }) => {
-  const [isChecked, setIsChecked] = useState(checked);
-
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
-    setIsChecked(checked);
     onChange(checked);
   };
 
@@ -33,7 +30,7 @@ const Checkbox: FC<CheckboxProps> = ({
       {renderLabel()}
       <input
         type="checkbox"
-        checked={isChecked}
+        checked={checked}
         onChange={handleCheckboxChange}
         className={s.checkboxInput}
       />

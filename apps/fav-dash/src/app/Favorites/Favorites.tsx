@@ -5,15 +5,16 @@ import { api } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { toastActions } from '../../store/toast/toast.actions';
 import { v4 as uuidv4 } from 'uuid';
+import { Receiver } from '../../types/api.type';
 
 const Favorites = () => {
-  const [data, setData] = useState<unknown>();
+  const [data, setData] = useState<Receiver[]>([]);
 
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const response = await api.get('/receivers', {
+      const response = await api.get<Receiver[]>('/receivers', {
         _sort: 'created_at',
         _order: 'desc',
       });
@@ -29,6 +30,37 @@ const Favorites = () => {
     }
   };
 
+  const handleDeleteSelected = async (selectedFavorites: Receiver[]) => {
+    try {
+      for (const selectedItem of selectedFavorites) {
+        await api.delete(`receivers/${selectedItem.id}`);
+
+        // Added this timeout to prevent database crashing
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
+
+      toastActions.addToast({
+        id: Date.now().toString(),
+        message:
+          selectedFavorites.length > 1
+            ? 'Favorecidos deletados com sucessos'
+            : 'Favorecido deletado com sucesso',
+        type: 'success',
+      });
+
+      await fetchData();
+    } catch (error) {
+      toastActions.addToast({
+        id: Date.now().toString(),
+        message: 'Erro ao deletar favorecido.',
+        type: 'error',
+      });
+
+      console.error('Error deleting selected items:', error);
+      fetchData();
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -40,7 +72,7 @@ const Favorites = () => {
         onAddFav={() => navigate('/novo')}
       ></Header>
 
-      <List listData={data} />
+      <List listData={data} onDeleteSelected={handleDeleteSelected} />
     </>
   );
 };
