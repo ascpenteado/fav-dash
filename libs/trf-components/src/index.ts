@@ -13,3 +13,4 @@ export { default as Toast } from './lib/elements/Table/Table.component';
 
 export { default as Header } from './lib/interface/compositions/Header/Header.component';
 export { default as Listing } from './lib/interface/compositions/Listing/Listing.component';
+export { default as AddFavoriteForm } from './lib/interface/compositions/AddFavoriteForm/AddFavoriteForm.component';

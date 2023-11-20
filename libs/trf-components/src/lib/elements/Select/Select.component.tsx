@@ -1,4 +1,4 @@
-import React, { useState, ComponentProps } from 'react';
+import React, { useState } from 'react';
 import styles from './Select.style.module.scss';
 
 type Option = {
@@ -8,16 +8,18 @@ type Option = {
 
 type SelectProps = {
   options: Option[];
-  onSelect: (selectedValue: string | number) => void;
-} & ComponentProps<'select'>;
+  id?: string;
+  name?: string;
+  onSelect: (selectedValue: string) => void;
+};
 
 const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
-  const [selectedValue, setSelectedValue] = useState<string | number>('');
+  const [selectedValue, setSelectedValue] = useState<string>('');
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     setSelectedValue(value);
-    onSelect(value);
+    onSelect(value.toString());
   };
 
   return (
@@ -27,7 +29,7 @@ const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
       onChange={handleSelectChange}
     >
       <option value="" disabled>
-        Select an option
+        Selecione uma opção
       </option>
       {options?.map((option) => (
         <option key={option.value} value={option.value}>
