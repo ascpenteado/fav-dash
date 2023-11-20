@@ -21,14 +21,16 @@ const Menu: FC<MenuProps> = ({ showClose, onClose }) => {
       <div className={s.logoWrapper}>
         <Icon iconUrl={logo} withCurrentColor={false}></Icon>
       </div>
-      <nav className={navbarClasses}>
-        <ul className={s.navigation}>
-          <li className={s.navItem}>Seus favorecidos</li>
-        </ul>
-        <div className={s.iconWrapper} onClick={onClose}>
-          <Icon iconUrl={close}></Icon>
-        </div>
-      </nav>
+      <div className={s.navWrapper}>
+        <nav className={navbarClasses}>
+          <ul className={s.navigation}>
+            <li className={s.navItem}>Seus favorecidos</li>
+          </ul>
+          <div className={s.iconWrapper} onClick={onClose}>
+            <Icon iconUrl={close}></Icon>
+          </div>
+        </nav>
+      </div>
     </>
   );
 };

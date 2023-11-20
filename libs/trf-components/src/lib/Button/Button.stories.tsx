@@ -3,14 +3,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import ButtonComponent from './Button.component';
-import { ThemeColors } from '../../types/Colors';
+import { Colors } from '../../types/Colors';
 import Icon from '../Icon/Icon.component';
 import plusIcon from '../../assets/svg/plus-icon.svg';
 
 const meta: Meta<typeof ButtonComponent> = {
   component: ButtonComponent,
   argTypes: {
-    variant: { control: 'select', options: [...Object.values(ThemeColors)] },
+    variant: { control: 'select', options: [...Object.values(Colors)] },
   },
 };
 
@@ -22,7 +22,7 @@ export const Flat: Story = {
     children: 'Hello, world!',
     disabled: false,
     outline: false,
-    variant: ThemeColors.PrimaryColor,
+    variant: Colors.PrimaryColor,
   },
 };
 
@@ -31,7 +31,7 @@ export const Outline: Story = {
     children: 'Hello, world!',
     disabled: false,
     outline: true,
-    variant: ThemeColors.PrimaryColor,
+    variant: Colors.PrimaryColor,
   },
 };
 
@@ -42,7 +42,7 @@ export const WithIcon: Story = {
     outline: false,
     responsive: true,
     style: { borderRadius: '50%', padding: '.4rem' },
-    variant: ThemeColors.PrimaryColor,
+    variant: Colors.PrimaryColor,
   },
 };
 
@@ -51,6 +51,6 @@ export const Disabled: Story = {
     children: 'Hello, world!',
     disabled: true,
     outline: false,
-    variant: ThemeColors.PrimaryColor,
+    variant: Colors.PrimaryColor,
   },
 };

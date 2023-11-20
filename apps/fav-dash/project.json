@@ -1,11 +1,11 @@
 {
   "name": "fav-dash",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/fav-dash",
+  "sourceRoot": "apps/fav-dash/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nx/next:build",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -13,51 +13,55 @@
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/fav-dash"
+          "mode": "development"
         },
-        "production": {}
+        "production": {
+          "mode": "production"
+        }
       }
     },
     "serve": {
-      "executor": "@nx/next:server",
+      "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "fav-dash:build",
-        "dev": true
+        "buildTarget": "fav-dash:build"
       },
       "configurations": {
         "development": {
           "buildTarget": "fav-dash:build:development",
-          "dev": true
+          "hmr": true
         },
         "production": {
           "buildTarget": "fav-dash:build:production",
-          "dev": false
+          "hmr": false
         }
       }
     },
-    "export": {
-      "executor": "@nx/next:export",
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "fav-dash:build:production"
+        "buildTarget": "fav-dash:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "fav-dash:build:development"
+        },
+        "production": {
+          "buildTarget": "fav-dash:build:production"
+        }
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "jestConfig": "apps/fav-dash/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/fav-dash"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/fav-dash/**/*.{ts,tsx,js,jsx}"]

@@ -8,8 +8,5 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
-  },
-  "devDependencies": {
-    "@types/dompurify": "^3.0.5"
   }
 }

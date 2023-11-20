@@ -8,15 +8,16 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES6",
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@transfeera/trf-components": ["dist/libs/trf-components"],
-      "@transfeera/trf-components/*": ["dist/libs/trf-components/*"]
+      "@components": ["dist/libs/trf-components"],
+      // "@components/types/*": ["dist/libs/trf-components/types/*"],
+      "@components/*": ["dist/libs/trf-components/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

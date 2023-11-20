@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { ThemeColors } from '../../types/Colors';
+import { ColorsType } from '../../types/Colors';
 import cn from 'classnames';
 import s from './Badge.style.module.scss';
 
 type BadgeProps = {
-  variant: ThemeColors;
+  variant: ColorsType;
   status: string;
 };
 

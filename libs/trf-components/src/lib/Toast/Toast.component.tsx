@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from 'react';
-import { ThemeColors } from '../../types/Colors';
+import { ColorsType } from '../../types/Colors';
 import s from './Toast.style.module.scss';
 import Icon from '../Icon/Icon.component';
 import closeIcon from '../../assets/svg/close-toast.svg';
@@ -8,7 +8,7 @@ import cn from 'classnames';
 interface ToastProps {
   message: string;
   duration: number;
-  variant: ThemeColors;
+  variant: ColorsType;
   onClose: () => void;
   visible?: boolean;
 }

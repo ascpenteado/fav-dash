@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ModalComponent from './Modal.component';
 import Button from '../Button/Button.component';
-import { ThemeColors } from '../../types/Colors';
+import { Colors } from '../../types/Colors';
 import { useState } from 'react';
 
 const meta: Meta<typeof ModalComponent> = {
@@ -27,10 +27,7 @@ const Template = () => {
           libero?
         </p>
       </ModalComponent>
-      <Button
-        variant={ThemeColors.PrimaryColor}
-        onClick={() => setIsOpen(true)}
-      >
+      <Button variant={Colors.PrimaryColor} onClick={() => setIsOpen(true)}>
         Open modal
       </Button>
     </>

@@ -1,15 +1,15 @@
 import { FC, ReactNode, MouseEvent, ComponentProps } from 'react';
-import { ThemeColors } from '../../types/Colors';
+import { Colors, ColorsType } from '../../types/Colors';
 import cn from 'classnames';
 import s from './Button.style.module.scss';
 
 type ButtonProps = {
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
-  children: ReactNode;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  children?: ReactNode;
   disabled?: boolean;
   outline?: boolean;
   responsive?: boolean;
-  variant: ThemeColors;
+  variant?: ColorsType;
 } & ComponentProps<'button'>;
 
 const Button: FC<ButtonProps> = ({
@@ -17,7 +17,7 @@ const Button: FC<ButtonProps> = ({
   onClick,
   disabled,
   outline,
-  variant,
+  variant = Colors.PrimaryColor,
   responsive,
   ...rest
 }) => {

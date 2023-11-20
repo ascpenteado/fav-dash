@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ToastComponent from './Toast.component';
-import { ThemeColors } from '../../types/Colors';
+import { Colors } from '../../types/Colors';
 
 const meta: Meta<typeof ToastComponent> = {
   component: ToastComponent,
   argTypes: {
-    variant: { control: 'select', options: [...Object.values(ThemeColors)] },
+    variant: { control: 'select', options: [...Object.values(Colors)] },
     onClose: { action: 'onClose', table: { disable: true } },
   },
   decorators: [
@@ -23,7 +23,7 @@ type Story = StoryObj<typeof ToastComponent>;
 export const WithTimer: Story = {
   args: {
     message: 'Favorecido alterado com sucesso',
-    variant: ThemeColors.PrimaryColor,
+    variant: Colors.PrimaryColor,
     duration: 3000,
     visible: true,
   },
@@ -32,7 +32,7 @@ export const WithTimer: Story = {
 export const WithoutTimer: Story = {
   args: {
     message: 'Favorecido alterado com sucesso',
-    variant: ThemeColors.PrimaryColor,
+    variant: Colors.PrimaryColor,
     visible: true,
   },
 };
