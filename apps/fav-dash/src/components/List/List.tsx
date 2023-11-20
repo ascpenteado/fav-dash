@@ -12,6 +12,7 @@ const statusColorMap: StatusColorMap = {
 };
 
 type ListProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   listData: any[];
 }
 

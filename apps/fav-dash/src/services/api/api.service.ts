@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, {
   AxiosRequestConfig,
   AxiosInstance,
   AxiosError,
   Method,
-  AxiosResponse,
 } from 'axios';
 
 type HttpHeaders = { [key: string]: string };

@@ -5,7 +5,7 @@ import { api } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
 const Favorites = () => {
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<unknown>();
   const [error, setError] = useState<string>('');
 
   const navigate = useNavigate();
