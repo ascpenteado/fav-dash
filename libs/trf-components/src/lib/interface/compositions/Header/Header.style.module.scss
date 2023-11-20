@@ -1,0 +1,52 @@
+@use '../../../../theme/variables/text-styles' as *;
+@use '../../../../theme/mixins/container.mixin' as *;
+@use 'sass:color';
+
+.wrapper {
+  background-color: hsla(210, 17%, 68%, 0.2);
+}
+
+.container {
+  @include app-container;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 2.5rem;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .title {
+    @include title;
+    color: hsla(0, 0%, 46%, 1);
+  }
+
+  .plusButton {
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--white);
+    width: 41px;
+    height: 41px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    &:hover {
+      transition: background-color 0.3s ease;
+      background-color: var(--primary-color-light);
+    }
+    .iconWrapper {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.right {
+  width: 254px;
+}

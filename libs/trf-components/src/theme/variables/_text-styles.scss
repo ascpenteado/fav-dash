@@ -15,10 +15,8 @@
   font-size: 16px;
 }
 
-// // title
-// color: #4D565D;
-// font-family: Roboto;
-// font-size: 28px;
-// font-style: normal;
-// font-weight: 300;
-// line-height: normal;
+@mixin title {
+  @include baseText;
+  font-size: 28px;
+  font-weight: 300;
+}

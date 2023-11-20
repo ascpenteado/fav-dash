@@ -19,6 +19,7 @@ const Button: FC<ButtonProps> = ({
   outline,
   variant = Colors.PrimaryColor,
   responsive,
+  className,
   ...rest
 }) => {
   const btnVariant = outline ? `${variant}-outline` : variant;
@@ -36,7 +37,7 @@ const Button: FC<ButtonProps> = ({
       {...rest}
       onClick={onClick}
       disabled={disabled}
-      className={classes}
+      className={`${classes} ${className}`}
       tabIndex={disabled ? -1 : 0} // Ensure the button is not focusable when disabled
       aria-disabled={disabled} // Indicate the button's state for screen readers
     >
