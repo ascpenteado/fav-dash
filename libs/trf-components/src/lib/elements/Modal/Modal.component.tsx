@@ -14,10 +14,12 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    document.body.style.overflow = 'auto';
     onClose();
   };
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
     setIsModalOpen(isOpen);
   }, [isOpen]);
 

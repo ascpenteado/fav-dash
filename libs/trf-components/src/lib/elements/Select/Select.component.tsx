@@ -10,11 +10,12 @@ type SelectProps = {
   options: Option[];
   id?: string;
   name?: string;
+  value?: string;
   onSelect: (selectedValue: string) => void;
 };
 
-const Select: React.FC<SelectProps> = ({ options, onSelect }) => {
-  const [selectedValue, setSelectedValue] = useState<string>('');
+const Select: React.FC<SelectProps> = ({ options, onSelect, value }) => {
+  const [selectedValue, setSelectedValue] = useState<string>(value ?? '');
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;

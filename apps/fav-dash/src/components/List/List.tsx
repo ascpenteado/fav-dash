@@ -1,4 +1,4 @@
-import { FC, Suspense, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Badge, Checkbox, Listing, Table } from '@components';
 import s from './List.style.module.scss';
 import { ColorsType } from '@components/types/Colors';
@@ -10,12 +10,9 @@ type ListProps = {
   onDeleteSelected: (selectedFavorites: Receiver[]) => void;
 };
 
-const Loading = () => {
-  return <p>carregando...</p>;
-};
-
 const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
   const [selectedFavorites, setSelectedFavorites] = useState<Receiver[]>([]);
+  const [disableDelBtn, setDisableDelBtn] = useState(true);
 
   const selectAll = () => {
     const allSelected = selectedFavorites.length === listData.length;
@@ -54,53 +51,62 @@ const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
     }
   };
 
+  useEffect(() => {
+    if (selectedFavorites.length > 0) {
+      setDisableDelBtn(false);
+    } else {
+      setDisableDelBtn(true);
+    }
+  }, [selectedFavorites]);
+
   return (
-    <Listing onDeleteSelected={() => onDeleteSelected(selectedFavorites)}>
-      <Suspense fallback={<Loading />}>
-        <Table>
-          <thead>
-            <tr>
-              <th className={s.checkWrapper}>
+    <Listing
+      onDeleteSelected={() => onDeleteSelected(selectedFavorites)}
+      disableBtn={disableDelBtn}
+    >
+      <Table>
+        <thead>
+          <tr>
+            <th className={s.checkWrapper}>
+              <Checkbox
+                checked={selectedFavorites.length === listData.length}
+                onChange={selectAll}
+              />
+              Favorecido
+            </th>
+            <th>CPF</th>
+            <th>Banco</th>
+            <th>Agência</th>
+            <th>CC</th>
+            <th>Status do Favorecido</th>
+          </tr>
+        </thead>
+        <tbody>
+          {listData?.map((item) => (
+            <tr key={item.id}>
+              <td className={s.checkWrapper}>
                 <Checkbox
-                  checked={selectedFavorites.length === listData.length}
-                  onChange={selectAll}
+                  checked={selectedFavorites.includes(item)}
+                  onChange={() => selectOne(item)}
                 />
-                Favorecido
-              </th>
-              <th>CPF</th>
-              <th>Banco</th>
-              <th>Agência</th>
-              <th>CC</th>
-              <th>Status do Favorecido</th>
+                <span className={s.name} onClick={() => openModal(item)}>
+                  {item.name}
+                </span>
+              </td>
+              <td>{item.tax_id}</td>
+              <td>{item.bank_name}</td>
+              <td>{item.bank_code}</td>
+              <td>{item.account}</td>
+              <td style={{ width: '188px' }}>
+                <Badge
+                  variant={statusColorMap[item.status] as ColorsType}
+                  status={item.status}
+                />
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {listData?.map((item) => (
-              <tr key={item.id}>
-                <td className={s.checkWrapper}>
-                  <Checkbox
-                    checked={selectedFavorites.includes(item)}
-                    onChange={() => selectOne(item)}
-                  />
-                  <span className={s.name} onClick={() => openModal(item)}>
-                    {item.name}
-                  </span>
-                </td>
-                <td>{item.tax_id}</td>
-                <td>{item.bank_name}</td>
-                <td>{item.bank_code}</td>
-                <td>{item.account}</td>
-                <td style={{ width: '188px' }}>
-                  <Badge
-                    variant={statusColorMap[item.status] as ColorsType}
-                    status={item.status}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Suspense>
+          ))}
+        </tbody>
+      </Table>
     </Listing>
   );
 };

@@ -20,7 +20,7 @@ export type FormValues = {
 
 type AddFavoriteFormProps = {
   onCancel: () => void;
-  onSave: (data: FormValues) => void;
+  onSave: (data: FormValues, id: string) => void;
   onDelete: (id: string) => void;
   formData?: FormValues;
   favorite: Receiver;
@@ -94,7 +94,7 @@ const DraftForm: FC<AddFavoriteFormProps> = ({
 
     try {
       await validationSchema.validate(formValues, { abortEarly: false });
-      onSave(formValues);
+      onSave(formValues, favorite.id);
     } catch (error) {
       if (error instanceof yup.ValidationError) {
         const fieldErrors: Partial<FormValues> = {};
@@ -175,6 +175,7 @@ const DraftForm: FC<AddFavoriteFormProps> = ({
                 id="pix-type"
                 name="pixType"
                 options={pixKeyOptions}
+                value={formValues.pixType}
                 onSelect={(value: string) =>
                   setFormValues({ ...formValues, pixType: value })
                 }

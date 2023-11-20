@@ -1,11 +1,11 @@
-import { AddFavoriteForm } from '@components';
-import { FormValues } from '@components/lib/interface/compositions/AddFavoriteForm/AddFavoriteForm.component';
+import { AddForm } from '@components';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { api } from '../../services/api';
 import { toastActions } from '../../store/toast/toast.actions';
 import { Receiver } from '../../types/api.type';
 import { formatDate } from '../../utils/format-date';
+import { FormValues } from '@components/lib/interface/compositions/AddForm/AddForm.component';
 
 const AddFavorite = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const AddFavorite = () => {
 
       setTimeout(() => {
         navigate('/');
-      }, 3000);
+      }, 300);
     } catch (error) {
       toastActions.addToast({
         id,
@@ -54,7 +54,7 @@ const AddFavorite = () => {
     }
   };
 
-  return <AddFavoriteForm onCancel={handleCancel} onSave={handleSave} />;
+  return <AddForm onCancel={handleCancel} onSave={handleSave} />;
 };
 
 export default AddFavorite;

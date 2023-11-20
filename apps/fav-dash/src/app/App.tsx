@@ -6,10 +6,13 @@ import { modalActions } from '../store/modal/modal.actions';
 import { modalStore } from '../store/modal/modal.state';
 import { toastActions } from '../store/toast/toast.actions';
 import { toastStore } from '../store/toast/toast.state';
+import { loaderStore } from '../store/loader/loader.state';
+import { useEffect } from 'react';
 
 export function App() {
   const toastState = useSnapshot(toastStore);
   const modalState = useSnapshot(modalStore);
+  const { isLoading } = useSnapshot(loaderStore);
   const toastVariantMap = {
     success: 'success-color',
     error: 'danger-color',
@@ -26,8 +29,13 @@ export function App() {
     return <Component {...modalState.content.props} />;
   };
 
+  // For better loader effect
+  useEffect(() => {
+    document.body.style.overflow = isLoading ? 'hidden' : 'auto';
+  }, [isLoading]);
+
   return (
-    <div>
+    <div style={{ overflow: isLoading ? 'hidden' : 'auto' }}>
       <Menu showClose={false} onClose={() => console.log('hei')} />
       <Outlet />
       <footer

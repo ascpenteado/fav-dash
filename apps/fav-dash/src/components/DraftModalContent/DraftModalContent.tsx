@@ -1,34 +1,88 @@
+import { DraftForm } from '@components';
 import { FC } from 'react';
-import { Receiver, statusColorMap } from '../../types/api.type';
-import { AddFavoriteForm, Badge } from '@components';
-import { ColorsType } from '@components/types/Colors';
-import s from './DraftModalContent.style.module.scss';
+import { Receiver } from '../../types/api.type';
+import { modalActions } from '../../store/modal/modal.actions';
+import { api } from '../../services/api';
+import { toastActions } from '../../store/toast/toast.actions';
+import { FormValues } from '@components/lib/interface/compositions/AddForm/AddForm.component';
 
 export type DraftModalContentProps = {
   favorite: Receiver;
 };
 
 const DraftModalContent: FC<DraftModalContentProps> = ({ favorite }) => {
-  const { name, status } = favorite;
-  return (
-    <div className={s.wrapper}>
-      <div className={s.status}>
-        <h3 className={s.name}>{name}</h3>
-        <div className={s.badgeWrapper}>
-          <Badge
-            status={status}
-            variant={statusColorMap[status] as ColorsType}
-          />
-        </div>
-      </div>
+  const handleCancel = () => {
+    modalActions.closeModal();
+  };
+  const handleSave = async (data: Partial<FormValues>, id: string) => {
+    try {
+      const favToBeUpdated = await api.get<Receiver>(`receivers/${id}`);
 
-      <div className={s.formWrapper}>
-        <AddFavoriteForm
-          onCancel={() => console.log('cancel')}
-          onSave={() => console.log('save')}
-        />
-      </div>
-    </div>
+      const payload: Partial<Receiver> = {
+        ...favToBeUpdated,
+        id,
+        name: data.name ?? '',
+        email: data.email ?? '',
+        pix_key_type: data.pixType ?? '',
+        pix_key: data.pixKey ?? '',
+        tax_id: data.taxId ?? '',
+      };
+
+      await api.put(`receivers/${id}`, payload);
+
+      toastActions.addToast({
+        id: Date.now().toString(),
+        message: 'Favorecido alterado com sucesso',
+        type: 'success',
+      });
+
+      modalActions.closeModal();
+    } catch (error) {
+      toastActions.addToast({
+        id: Date.now().toString(),
+        message: 'Erro ao atualizar favorecido.',
+        type: 'error',
+      });
+
+      console.error('Error updating favorite:', error);
+
+      modalActions.closeModal();
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!id) return;
+
+    try {
+      await api.delete(`receivers/${id}`);
+
+      toastActions.addToast({
+        id: Date.now().toString(),
+        message: 'Favorecido deletado com sucesso',
+        type: 'success',
+      });
+
+      modalActions.closeModal();
+    } catch (error) {
+      toastActions.addToast({
+        id: Date.now().toString(),
+        message: 'Erro ao deletar favorecido.',
+        type: 'error',
+      });
+
+      console.error('Error deleting favorite:', error);
+
+      modalActions.closeModal();
+    }
+  };
+
+  return (
+    <DraftForm
+      onCancel={handleCancel}
+      onSave={handleSave}
+      onDelete={handleDelete}
+      favorite={favorite}
+    />
   );
 };
 

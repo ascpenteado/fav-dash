@@ -25,6 +25,9 @@
 
 .hasBorder {
   border: 2px solid hsl(0, 0%, 93%);
+  &:focus {
+    border-color: var(--primary-color);
+  }
 }
 
 .iconWrapper {

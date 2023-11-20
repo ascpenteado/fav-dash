@@ -1,4 +1,4 @@
-import { proxy, subscribe } from 'valtio';
+import { proxy } from 'valtio';
 
 export type Toast = {
   id: string;
@@ -12,8 +12,4 @@ export type ToastState = {
 
 export const toastStore = proxy<ToastState>({
   toasts: [],
-});
-
-subscribe(toastStore, () => {
-  console.log('Toast store updated:', toastStore.toasts);
 });

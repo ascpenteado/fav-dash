@@ -19,7 +19,7 @@ export type FormValues = {
 
 type AddFavoriteFormProps = {
   onCancel: () => void;
-  onSave: (data: Partial<FormValues>) => void;
+  onSave: (data: Partial<FormValues>, id: string) => void;
   onDelete: (id: string) => void;
   formData?: FormValues;
   favorite: Receiver;
@@ -74,7 +74,7 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({
 
     try {
       await validationSchema.validate(formValues, { abortEarly: false });
-      onSave(formValues);
+      onSave(formValues, favorite.id);
     } catch (error) {
       if (error instanceof yup.ValidationError) {
         const fieldErrors: Partial<FormValues> = {};
