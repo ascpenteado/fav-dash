@@ -20,7 +20,7 @@ export type FormValues = {
 type AddFavoriteFormProps = {
   onCancel: () => void;
   onSave: (data: Partial<FormValues>, id: string) => void;
-  onDelete: (id: string) => void;
+  onDelete: (favorite: Receiver) => void;
   formData?: FormValues;
   favorite: Receiver;
 };
@@ -151,7 +151,7 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({
                   variant="danger-color"
                   responsive
                   className={s.deleteBtn}
-                  onClick={() => onDelete(favorite.id)}
+                  onClick={() => onDelete(favorite)}
                   type="button"
                 >
                   <div className={s.iconWrapper}>

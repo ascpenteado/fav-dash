@@ -1,9 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { Badge, Checkbox, Listing, Table } from '@components';
-import s from './List.style.module.scss';
 import { ColorsType } from '@components/types/Colors';
-import { Receiver, statusColorMap } from '../../types/api.type';
 import { modalActions } from '../../store/modal/modal.actions';
+import { Receiver, statusColorMap } from '../../types/api.type';
+import s from './List.style.module.scss';
 
 type ListProps = {
   listData: Receiver[];
@@ -12,7 +12,6 @@ type ListProps = {
 
 const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
   const [selectedFavorites, setSelectedFavorites] = useState<Receiver[]>([]);
-  const [disableDelBtn, setDisableDelBtn] = useState(true);
 
   const selectAll = () => {
     const allSelected = selectedFavorites.length === listData.length;
@@ -38,31 +37,23 @@ const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
   };
 
   const openModal = async (item: Receiver) => {
-    if (item.status === 'rascunho') {
-      const Draft = await import('../DraftModalContent/DraftModalContent');
-      modalActions.openModal(Draft.default, { favorite: item });
-    }
+    const modalContent =
+      item.status === 'rascunho'
+        ? await import('../DraftModalContent/DraftModalContent')
+        : await import('../ValidatedModalContent/ValidatedModalContent');
 
-    if (item.status === 'validado') {
-      const Validated = await import(
-        '../ValidatedModalContent/ValidatedModalContent'
-      );
-      modalActions.openModal(Validated.default, { favorite: item });
-    }
+    modalActions.openModal(modalContent.default, { favorite: item });
   };
 
-  useEffect(() => {
-    if (selectedFavorites.length > 0) {
-      setDisableDelBtn(false);
-    } else {
-      setDisableDelBtn(true);
-    }
-  }, [selectedFavorites]);
+  const handleDeleteSelected = () => {
+    onDeleteSelected(selectedFavorites);
+    setSelectedFavorites([]);
+  };
 
   return (
     <Listing
-      onDeleteSelected={() => onDeleteSelected(selectedFavorites)}
-      disableBtn={disableDelBtn}
+      onDeleteSelected={handleDeleteSelected}
+      disableBtn={selectedFavorites.length === 0}
     >
       <Table>
         <thead>
@@ -82,8 +73,8 @@ const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
           </tr>
         </thead>
         <tbody>
-          {listData?.map((item) => (
-            <tr key={item.id}>
+          {listData.map((item, i) => (
+            <tr key={i + item.id}>
               <td className={s.checkWrapper}>
                 <Checkbox
                   checked={selectedFavorites.includes(item)}

@@ -13,6 +13,7 @@ export { default as Table } from './lib/elements/Table/Table.component';
 export { default as Toast } from './lib/elements/Toast/Toast.component';
 
 export { default as AddForm } from './lib/interface/compositions/AddForm/AddForm.component';
+export { default as ConfirmDeleteModal } from './lib/interface/compositions/ConfirmDeleteModal/ConfirmDeleteModal.component';
 export { default as DraftForm } from './lib/interface/compositions/DraftForm/DraftForm.component';
 export { default as Header } from './lib/interface/compositions/Header/Header.component';
 export { default as Listing } from './lib/interface/compositions/Listing/Listing.component';

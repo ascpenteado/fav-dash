@@ -1,3 +1,4 @@
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal';
 import { Header, Loader } from '@components';
 import List from '../../components/List/List';
 import { useCallback, useEffect, useState } from 'react';
@@ -9,30 +10,26 @@ import { Receiver } from '../../types/api.type';
 import { useSnapshot } from 'valtio';
 import { loaderStore } from '../../store/loader/loader.state';
 import { loaderActions } from '../../store/loader/loader.actions';
-import { modalStore } from '../../store/modal/modal.state';
+import { modalActions } from '../../store/modal/modal.actions';
+import { receiverActions } from '../../store/receivers/receivers.action';
+import { receiverStore } from '../../store/receivers/receivers.state';
 
 const Favorites = () => {
-  const [data, setData] = useState<Receiver[]>([]);
-
   const [filteredData, setFilteredData] = useState<Receiver[]>([]);
   const [filter, setFilter] = useState<string>('');
-
+  const receiverState = useSnapshot(receiverStore);
   const { isLoading } = useSnapshot(loaderStore);
-  const modalState = useSnapshot(modalStore);
-
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    loaderActions.setIsLoading(true);
-
     try {
+      loaderActions.setIsLoading(true);
       const response = await api.get<Receiver[]>('/receivers', {
         _sort: 'created_at',
         _order: 'desc',
       });
 
-      setData(response);
-      loaderActions.setIsLoading(false);
+      receiverActions.loadInitialReceivers([...response]);
     } catch (err) {
       toastActions.addToast({
         id: uuidv4(),
@@ -40,80 +37,86 @@ const Favorites = () => {
         type: 'error',
       });
       console.error('Error fetching data:', err);
+    } finally {
       loaderActions.setIsLoading(false);
     }
   };
 
-  const handleDeleteSelected = async (selectedFavorites: Receiver[]) => {
+  const deleteSelected = async (selectedFavorites: Receiver[]) => {
     loaderActions.setIsLoading(true);
+    modalActions.closeModal();
     try {
       for (const selectedItem of selectedFavorites) {
         await api.delete(`receivers/${selectedItem.id}`);
 
+        receiverActions.removeReceiver(selectedItem.id);
+
         // Added this timeout to prevent json-server from crashing
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        // when bulk deleting
+        await new Promise((resolve) => setTimeout(resolve, 300));
       }
 
       toastActions.addToast({
-        id: Date.now().toString(),
+        id: uuidv4(),
         message:
           selectedFavorites.length > 1
             ? 'Favorecidos deletados com sucessos'
             : 'Favorecido deletado com sucesso',
         type: 'success',
       });
-
-      await fetchData();
-      loaderActions.setIsLoading(false);
     } catch (error) {
       toastActions.addToast({
-        id: Date.now().toString(),
+        id: uuidv4(),
         message: 'Erro ao deletar favorecido.',
         type: 'error',
       });
 
       console.error('Error deleting selected items:', error);
-      fetchData();
+    } finally {
       loaderActions.setIsLoading(false);
     }
   };
 
-  const filterList = useCallback(() => {
-    if (filter === '') return setFilteredData(data);
+  const handleDeleteSelected = async (selectedFavorites: Receiver[]) => {
+    modalActions.openModal(ConfirmModal, {
+      confirmText: 'Confirma a exclusão dos selecionados?',
+      onConfirm: async () => await deleteSelected(selectedFavorites),
+    });
+  };
 
-    const filtered = data.filter((favorite) => {
+  const filterList = useCallback(() => {
+    const filtered = receiverState.receivers.filter((favorite) => {
       const { name, tax_id, branch, account } = favorite || {};
       const filterText = filter.toLowerCase();
 
       return (
         name?.toLowerCase().includes(filterText) ||
-        tax_id?.includes(filterText) ||
-        branch?.includes(filterText) ||
-        account?.includes(filterText)
+        tax_id?.toLowerCase().includes(filterText) ||
+        branch?.toLowerCase().includes(filterText) ||
+        account?.toLowerCase().includes(filterText)
       );
     });
+
     setFilteredData(filtered);
-  }, [data, filter]);
+  }, [filter, receiverState.receivers]);
 
   useEffect(() => {
-    if (!modalState.isOpen) {
-      fetchData();
-    }
-  }, [modalState.isOpen]);
+    fetchData();
+  }, []);
 
   useEffect(() => {
     filterList();
-  }, [filter, filterList]);
+  }, [filterList]);
 
   return (
     <>
+      {isLoading && <Loader />}
       <Header
         label="Seus Favorecidos"
         onAddFav={() => navigate('/novo')}
         onChangeFilter={(filter) => setFilter(filter)}
       ></Header>
 
-      {isLoading && <Loader />}
       <List listData={filteredData} onDeleteSelected={handleDeleteSelected} />
     </>
   );

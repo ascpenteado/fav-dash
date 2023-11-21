@@ -1,0 +1,36 @@
+@use '../../../../theme/mixins/container.mixin' as *;
+@use '../../../../theme/variables/text-styles' as *;
+
+.container {
+  max-width: 550px;
+}
+
+.btnsWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5rem;
+}
+
+.title {
+  color: hsl(206, 9%, 33%);
+  font-family: Roboto;
+  font-size: 1.375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 2.3125rem;
+}
+
+.name,
+.description {
+  color: #4d565d;
+  font-family: Roboto;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.38;
+}
+
+.name {
+  font-weight: 400;
+}

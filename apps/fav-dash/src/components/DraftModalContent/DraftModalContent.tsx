@@ -5,6 +5,8 @@ import { modalActions } from '../../store/modal/modal.actions';
 import { api } from '../../services/api';
 import { toastActions } from '../../store/toast/toast.actions';
 import { FormValues } from '@components/lib/interface/compositions/AddForm/AddForm.component';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
+import { receiverActions } from '../../store/receivers/receivers.action';
 
 export type DraftModalContentProps = {
   favorite: Receiver;
@@ -18,7 +20,7 @@ const DraftModalContent: FC<DraftModalContentProps> = ({ favorite }) => {
     try {
       const favToBeUpdated = await api.get<Receiver>(`receivers/${id}`);
 
-      const payload: Partial<Receiver> = {
+      const payload: Receiver = {
         ...favToBeUpdated,
         id,
         name: data.name ?? '',
@@ -36,7 +38,7 @@ const DraftModalContent: FC<DraftModalContentProps> = ({ favorite }) => {
         type: 'success',
       });
 
-      modalActions.closeModal();
+      receiverActions.updateReceiver(id, payload);
     } catch (error) {
       toastActions.addToast({
         id: Date.now().toString(),
@@ -45,14 +47,12 @@ const DraftModalContent: FC<DraftModalContentProps> = ({ favorite }) => {
       });
 
       console.error('Error updating favorite:', error);
-
+    } finally {
       modalActions.closeModal();
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!id) return;
-
+  const deleteSelected = async (id: string) => {
     try {
       await api.delete(`receivers/${id}`);
 
@@ -62,7 +62,7 @@ const DraftModalContent: FC<DraftModalContentProps> = ({ favorite }) => {
         type: 'success',
       });
 
-      modalActions.closeModal();
+      receiverActions.removeReceiver(id);
     } catch (error) {
       toastActions.addToast({
         id: Date.now().toString(),
@@ -71,9 +71,18 @@ const DraftModalContent: FC<DraftModalContentProps> = ({ favorite }) => {
       });
 
       console.error('Error deleting favorite:', error);
-
+    } finally {
       modalActions.closeModal();
     }
+  };
+
+  const handleDelete = async (favorite: Receiver) => {
+    if (!favorite.id) return;
+
+    modalActions.openModal(ConfirmModal, {
+      confirmText: `Confirma a exclusão de ${favorite.name}?`,
+      onConfirm: async () => await deleteSelected(favorite.id),
+    });
   };
 
   return (

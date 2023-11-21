@@ -6,6 +6,7 @@ import { toastActions } from '../../store/toast/toast.actions';
 import { Receiver } from '../../types/api.type';
 import { formatDate } from '../../utils/format-date';
 import { FormValues } from '@components/lib/interface/compositions/AddForm/AddForm.component';
+import { receiverActions } from '../../store/receivers/receivers.action';
 
 const AddFavorite = () => {
   const navigate = useNavigate();
@@ -41,6 +42,8 @@ const AddFavorite = () => {
         message: 'Favorecido adicionado com sucesso',
         type: 'success',
       });
+
+      receiverActions.addReceiver(payload);
 
       setTimeout(() => {
         navigate('/');
