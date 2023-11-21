@@ -1,6 +1,6 @@
 import { Header, Loader } from '@components';
 import List from '../../components/List/List';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { toastActions } from '../../store/toast/toast.actions';
@@ -13,6 +13,9 @@ import { modalStore } from '../../store/modal/modal.state';
 
 const Favorites = () => {
   const [data, setData] = useState<Receiver[]>([]);
+
+  const [filteredData, setFilteredData] = useState<Receiver[]>([]);
+  const [filter, setFilter] = useState<string>('');
 
   const { isLoading } = useSnapshot(loaderStore);
   const modalState = useSnapshot(modalStore);
@@ -75,21 +78,43 @@ const Favorites = () => {
     }
   };
 
+  const filterList = useCallback(() => {
+    if (filter === '') return setFilteredData(data);
+
+    const filtered = data.filter((favorite) => {
+      const { name, tax_id, branch, account } = favorite || {};
+      const filterText = filter.toLowerCase();
+
+      return (
+        name?.toLowerCase().includes(filterText) ||
+        tax_id?.includes(filterText) ||
+        branch?.includes(filterText) ||
+        account?.includes(filterText)
+      );
+    });
+    setFilteredData(filtered);
+  }, [data, filter]);
+
   useEffect(() => {
     if (!modalState.isOpen) {
       fetchData();
     }
   }, [modalState.isOpen]);
 
+  useEffect(() => {
+    filterList();
+  }, [filter, filterList]);
+
   return (
     <>
       <Header
         label="Seus Favorecidos"
         onAddFav={() => navigate('/novo')}
+        onChangeFilter={(filter) => setFilter(filter)}
       ></Header>
 
       {isLoading && <Loader />}
-      <List listData={data} onDeleteSelected={handleDeleteSelected} />
+      <List listData={filteredData} onDeleteSelected={handleDeleteSelected} />
     </>
   );
 };

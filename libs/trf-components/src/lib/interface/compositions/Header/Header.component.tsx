@@ -9,9 +9,10 @@ import plus from '../../../../assets/svg/plus-icon.svg';
 type HeaderProps = {
   label: string;
   onAddFav: () => void;
+  onChangeFilter: (filter: string) => void;
 };
 
-const Header: FC<HeaderProps> = ({ label, onAddFav }) => {
+const Header: FC<HeaderProps> = ({ label, onAddFav, onChangeFilter }) => {
   return (
     <div className={s.wrapper}>
       <div className={s.container}>
@@ -29,6 +30,7 @@ const Header: FC<HeaderProps> = ({ label, onAddFav }) => {
             placeholder="Nome, CPF, agência ou conta"
             hasBorder={false}
             iconUrl={mag}
+            onChange={(e) => onChangeFilter(e.target.value)}
           />
         </div>
       </div>
