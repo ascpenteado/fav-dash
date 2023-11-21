@@ -92,7 +92,7 @@ These commands can be used separately or as needed:
 
 <br/>
 
-![Print Backlog](image.png)
+![Print Backlog](print-backlog.png)
 There is a backlog of planned tasks that were not able to complete to this date. 
 
 Link here: https://github.com/users/ascpenteado/projects/1
