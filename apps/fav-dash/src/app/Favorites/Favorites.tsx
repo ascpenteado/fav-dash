@@ -13,6 +13,7 @@ import { loaderActions } from '../../store/loader/loader.actions';
 import { modalActions } from '../../store/modal/modal.actions';
 import { receiverActions } from '../../store/receivers/receivers.action';
 import { receiverStore } from '../../store/receivers/receivers.state';
+import { navbarActions } from '../../store/navbar/navbar.actions';
 
 const Favorites = () => {
   const [filteredData, setFilteredData] = useState<Receiver[]>([]);
@@ -60,7 +61,7 @@ const Favorites = () => {
         id: uuidv4(),
         message:
           selectedFavorites.length > 1
-            ? 'Favorecidos deletados com sucessos'
+            ? 'Favorecidos deletados com sucesso'
             : 'Favorecido deletado com sucesso',
         type: 'success',
       });
@@ -79,22 +80,27 @@ const Favorites = () => {
 
   const handleDeleteSelected = async (selectedFavorites: Receiver[]) => {
     modalActions.openModal(ConfirmModal, {
-      confirmText: 'Confirma a exclusão dos selecionados?',
+      confirmText:
+        selectedFavorites.length > 1
+          ? 'Confirma a exclusão dos selecionados?'
+          : 'Confirma a exclusão do selecionado?',
       onConfirm: async () => await deleteSelected(selectedFavorites),
     });
   };
 
   const filterList = useCallback(() => {
     const filtered = receiverState.receivers.filter((favorite) => {
-      const { name, tax_id, branch, account } = favorite || {};
+      const { name, tax_id, bank_code, account } = favorite || {};
       const filterText = filter.toLowerCase();
 
-      return (
-        name?.toLowerCase().includes(filterText) ||
-        tax_id?.toLowerCase().includes(filterText) ||
-        branch?.toLowerCase().includes(filterText) ||
-        account?.toLowerCase().includes(filterText)
-      );
+      const checkName = name?.toLowerCase().includes(filterText);
+      const checkTaxId = tax_id?.toLowerCase().includes(filterText);
+      const checkBankcode = bank_code?.toLowerCase().includes(filterText);
+      const checkAccount = account?.toLowerCase().includes(filterText);
+
+      const validation = [checkName, checkTaxId, checkBankcode, checkAccount];
+
+      return validation.some((value) => value === true);
     });
 
     setFilteredData(filtered);
@@ -113,8 +119,11 @@ const Favorites = () => {
       {isLoading && <Loader />}
       <Header
         label="Seus Favorecidos"
-        onAddFav={() => navigate('/novo')}
-        onChangeFilter={(filter) => setFilter(filter)}
+        onAddFav={() => {
+          navigate('/novo');
+          navbarActions.showCloseIcon(true);
+        }}
+        onChangeFilter={(filter: string) => setFilter(filter)}
       ></Header>
 
       <List listData={filteredData} onDeleteSelected={handleDeleteSelected} />

@@ -8,6 +8,7 @@ import { Receiver, statusColorMap } from '../../../../types/api';
 import Badge from '../../../elements/Badge/Badge.component';
 import Icon from '../../../elements/Icon/Icon.component';
 import trash from '../../../../assets/svg/trashcan.svg';
+import { formatCPForCNPJ } from '../../../../utils/format-cpf-cnpj';
 
 export type FormValues = {
   name: string;
@@ -104,7 +105,7 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({
         <div className={s.formWrapper}>
           <div className={s.infoGroup} style={{ gridColumn: 'span 2' }}>
             <p className={s.label}>CPF / CNPJ</p>
-            <p className={s.value}>{tax_id}</p>
+            <p className={s.value}>{formatCPForCNPJ(tax_id)}</p>
           </div>
 
           <div className={s.infoGroup}>
@@ -123,7 +124,7 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({
           </div>
 
           <div className={s.infoGroup}>
-            <p className={s.label}>Conta poupança</p>
+            <p className={s.label}>{account_type}</p>
             <p className={s.value}>{account}</p>
           </div>
 

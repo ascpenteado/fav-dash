@@ -9,6 +9,7 @@ import { ColorsType } from '../../../../types/Colors';
 import Badge from '../../../elements/Badge/Badge.component';
 import Icon from '../../../elements/Icon/Icon.component';
 import trash from '../../../../assets/svg/trashcan.svg';
+import { formatCPForCNPJ } from '../../../../utils/format-cpf-cnpj';
 
 export type FormValues = {
   name: string;
@@ -68,7 +69,15 @@ const DraftForm: FC<AddFavoriteFormProps> = ({
     taxId: yup
       .string()
       .required('CPF ou CNPJ é obrigatório')
-      .matches(/^[0-9]+$/, 'Digite um CPF/CNPJ válido'),
+      .test('valid-cpf-cnpj', 'Digite um CPF/CNPJ válido', (value) => {
+        // Allow empty values
+        if (!value) return true;
+        // Remove dots and dashes from the value before validation
+        const cleanedValue = value.replace(/[/.-]/g, '');
+
+        // Check if the cleaned value has a valid length for CPF or CNPJ
+        return cleanedValue.length === 11 || cleanedValue.length === 14;
+      }),
     email: yup
       .string()
       .email('Digite um e-mail válido')
@@ -144,7 +153,7 @@ const DraftForm: FC<AddFavoriteFormProps> = ({
                 id="tax-id"
                 name="taxId"
                 hasBorder
-                value={formValues.taxId}
+                value={formatCPForCNPJ(formValues.taxId)}
                 onChange={handleInputChange}
               />
               {errors.taxId && (

@@ -8,9 +8,10 @@ import classNames from 'classnames';
 interface MenuProps {
   showClose: boolean;
   onClose: () => void;
+  onLogoClick: () => void;
 }
 
-const Menu: FC<MenuProps> = ({ showClose, onClose }) => {
+const Menu: FC<MenuProps> = ({ showClose, onClose, onLogoClick }) => {
   const navbarClasses = classNames({
     [s.navbar]: true,
     [s.showClose]: showClose,
@@ -18,7 +19,7 @@ const Menu: FC<MenuProps> = ({ showClose, onClose }) => {
 
   return (
     <>
-      <div className={s.logoWrapper}>
+      <div className={s.logoWrapper} onClick={onLogoClick}>
         <Icon iconUrl={logo} withCurrentColor={false}></Icon>
       </div>
       <div className={s.navWrapper}>

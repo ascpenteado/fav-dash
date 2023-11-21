@@ -4,6 +4,7 @@ import { ColorsType } from '@components/types/Colors';
 import { modalActions } from '../../store/modal/modal.actions';
 import { Receiver, statusColorMap } from '../../types/api.type';
 import s from './List.style.module.scss';
+import { formatCPForCNPJ } from '../../utils/format-cpf-cnpj';
 
 type ListProps = {
   listData: Receiver[];
@@ -65,7 +66,7 @@ const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
               />
               Favorecido
             </th>
-            <th>CPF</th>
+            <th>CPF/CNPJ</th>
             <th>Banco</th>
             <th>Agência</th>
             <th>CC</th>
@@ -84,7 +85,7 @@ const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
                   {item.name}
                 </span>
               </td>
-              <td>{item.tax_id}</td>
+              <td>{formatCPForCNPJ(item.tax_id)}</td>
               <td>{item.bank_name ?? '---'}</td>
               <td>{item.bank_code ?? '---'}</td>
               <td>{item.account ?? '---'}</td>

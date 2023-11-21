@@ -5,6 +5,7 @@
 .logoWrapper {
   @include app-container;
   padding-block: 0.625rem 0.9375rem;
+  cursor: pointer;
 }
 
 .navWrapper {
@@ -45,6 +46,7 @@
   height: 1.3125rem;
   opacity: 0;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .showClose {

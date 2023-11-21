@@ -34,11 +34,11 @@ Follow these steps in order to successfully run the application:
     ```
    Build the application for production.
 
-4. **Start Backend API (JSON Server):**
+4. **Start Backend API (use other terminal window):**
     ```bash
     yarn api:dev
     ```
-   Start the backend API.
+Start the backend API.
 
 5. **Run the Application in Production Mode:**
     ```bash

@@ -1,6 +1,6 @@
 import { Menu, Modal, Toast } from '@components';
 import '@components/style.css';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useSnapshot } from 'valtio';
 import { modalActions } from '../store/modal/modal.actions';
 import { modalStore } from '../store/modal/modal.state';
@@ -8,11 +8,15 @@ import { toastActions } from '../store/toast/toast.actions';
 import { toastStore } from '../store/toast/toast.state';
 import { loaderStore } from '../store/loader/loader.state';
 import { useEffect } from 'react';
+import { navbarActions } from '../store/navbar/navbar.actions';
+import { navbarStore } from '../store/navbar/navbar.state';
 
 export function App() {
   const toastState = useSnapshot(toastStore);
   const modalState = useSnapshot(modalStore);
+  const { showCloseIcon } = useSnapshot(navbarStore);
   const { isLoading } = useSnapshot(loaderStore);
+  const navigate = useNavigate();
   const toastVariantMap = {
     success: 'success-color',
     error: 'danger-color',
@@ -34,9 +38,20 @@ export function App() {
     document.body.style.overflow = isLoading ? 'hidden' : 'auto';
   }, [isLoading]);
 
+  useEffect(() => {
+    document.body.style.overflow = modalState.isOpen ? 'hidden' : 'auto';
+  }, [modalState.isOpen]);
+
   return (
     <div style={{ overflow: isLoading ? 'hidden' : 'auto' }}>
-      <Menu showClose={false} onClose={() => console.log('hei')} />
+      <Menu
+        showClose={showCloseIcon}
+        onClose={() => {
+          navbarActions.showCloseIcon(false);
+          navigate('/');
+        }}
+        onLogoClick={() => navigate('/')}
+      />
       <Outlet />
       <footer
         style={{

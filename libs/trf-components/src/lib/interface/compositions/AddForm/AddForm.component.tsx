@@ -4,6 +4,7 @@ import Button from '../../../elements/Button/Button.component';
 import Input from '../../../elements/Input/Input.component';
 import Select from '../../../elements/Select/Select.component';
 import s from './AddForm.style.module.scss';
+import { formatCPForCNPJ } from '../../../../utils/format-cpf-cnpj';
 
 export type FormValues = {
   name: string;
@@ -55,7 +56,15 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({ onCancel, onSave }) => {
     taxId: yup
       .string()
       .required('CPF ou CNPJ é obrigatório')
-      .matches(/^[0-9]+$/, 'Digite um CPF/CNPJ válido'),
+      .test('valid-cpf-cnpj', 'Digite um CPF/CNPJ válido', (value) => {
+        // Allow empty values
+        if (!value) return true;
+        // Remove dots and dashes from the value before validation
+        const cleanedValue = value.replace(/[/.-]/g, '');
+
+        // Check if the cleaned value has a valid length for CPF or CNPJ
+        return cleanedValue.length === 11 || cleanedValue.length === 14;
+      }),
     email: yup
       .string()
       .email('Digite um e-mail válido')
@@ -68,9 +77,16 @@ const AddFavoriteForm: FC<AddFavoriteFormProps> = ({ onCancel, onSave }) => {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = event.target;
+
+    let formatedVal = value;
+
+    // Verifica se o campo alterado é o de CPF ou CNPJ e formata o valor
+    if (name === 'taxId') {
+      formatedVal = formatCPForCNPJ(value);
+    }
     setFormValues((prevValues) => ({
       ...prevValues,
-      [name]: value,
+      [name]: formatedVal,
     }));
   };
 
