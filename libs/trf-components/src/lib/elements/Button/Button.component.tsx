@@ -3,7 +3,7 @@ import { Colors, ColorsType } from '../../../types/Colors';
 import cn from 'classnames';
 import s from './Button.style.module.scss';
 
-type ButtonProps = {
+export type ButtonProps = {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   children?: ReactNode;
   disabled?: boolean;

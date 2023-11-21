@@ -39,9 +39,6 @@
     "@nx/vite:test": {
       "cache": true,
       "inputs": ["default", "^production"]
-    },
-    "e2e": {
-      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
@@ -75,12 +72,6 @@
       },
       "component": {
         "style": "scss"
-      }
-    },
-    "@nx/next": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint"
       }
     }
   }

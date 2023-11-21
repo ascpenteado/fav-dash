@@ -16,7 +16,6 @@
     "baseUrl": ".",
     "paths": {
       "@components": ["dist/libs/trf-components"],
-      // "@components/types/*": ["dist/libs/trf-components/types/*"],
       "@components/*": ["dist/libs/trf-components/*"]
     }
   },

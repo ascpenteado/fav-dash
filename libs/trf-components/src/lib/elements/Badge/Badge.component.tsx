@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import { ColorsType } from '../../../types/Colors';
 import cn from 'classnames';
 import s from './Badge.style.module.scss';
+import { FavoriteStatus } from '../../../types/api';
 
-type BadgeProps = {
+export type BadgeProps = {
   variant: ColorsType;
-  status: string;
+  status: FavoriteStatus;
 };
 
 const Badge: FC<BadgeProps> = ({ variant, status }) => {

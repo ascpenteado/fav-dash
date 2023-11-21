@@ -85,9 +85,9 @@ const List: FC<ListProps> = ({ listData, onDeleteSelected }) => {
                 </span>
               </td>
               <td>{item.tax_id}</td>
-              <td>{item.bank_name}</td>
-              <td>{item.bank_code}</td>
-              <td>{item.account}</td>
+              <td>{item.bank_name ?? '---'}</td>
+              <td>{item.bank_code ?? '---'}</td>
+              <td>{item.account ?? '---'}</td>
               <td style={{ width: '188px' }} onClick={() => openModal(item)}>
                 <Badge
                   variant={statusColorMap[item.status] as ColorsType}

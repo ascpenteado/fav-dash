@@ -21,8 +21,4 @@ export const receiverActions = {
       receiver.id === id ? { ...receiver, ...updatedReceiver } : receiver,
     );
   },
-
-  clearReceivers: () => {
-    receiverStore.receivers = [];
-  },
 };

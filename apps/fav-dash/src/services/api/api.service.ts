@@ -39,7 +39,7 @@ export class ApiClient {
       return resp.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log((error as AxiosError).config.baseURL);
+        console.log(error);
       }
       throw this.createApiError(error);
     }
